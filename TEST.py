@@ -34,4 +34,21 @@ x.head()
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=42) #test_size=0.25 shows 25% of x and random_state is fixing the seed value
 x_train.head()
 
+#to find the size of x_train and x_test 
+print('X_train size is ',x_train.shape)
+print('X_test size is ',x_test.shape)
+
+#now train the model 
+lr=LinearRegression().fit(x_train,y_train)
+predictions=lr.predict(x_test)
+
+#to find total prediction mean squared error use
+mae = mean_absolute_error(predictions, y_test)
+print("Mean Absolute Error :", round(mae, 2))
+
+#now we can check the Actual output and predicted output putting side by side using pandas
+predictionsfull=lr.predict(x)
+pred_series = pd.Series(predictionsfull, name="Predicted")
+submission = pd.concat([df, pred_series], axis=1)
+submission.head()
 
